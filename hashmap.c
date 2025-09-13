@@ -1,3 +1,4 @@
+// Fernando Maturana Cifuentes 21.101.824-0
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -88,6 +89,7 @@ HashMap * createMap(long capacity) {
     map->capacity=capacity;
     map->current=-1;
     return map;
+
     
 }
 
