@@ -1,4 +1,3 @@
-// Fernando Maturana Cifuentes 21.101.824-0
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -39,7 +38,7 @@ int is_equal(void* key1, void* key2){
     return 0;
 }
 
-
+//Esta función inserta un nuevo dato (key,value) en el mapa y actualiza el índice current a esa posición
 void insertMap(HashMap * map, char * key, void * value) {
     long position = hash(key, map->capacity);
 
@@ -56,13 +55,14 @@ void insertMap(HashMap * map, char * key, void * value) {
     map->size++;
 }
 
+//agranda la capacidad del arreglo buckets y reubica todos sus elementos
 void enlarge(HashMap * map) {
 
     enlarge_called = 1; // no borrar (testing purposes)
     long old_capacity = map->capacity;
     Pair ** old_buckets = map->buckets;
 
-    // Duplica la capacidad.
+    // Duplica capacidad.
     map->capacity = 2 * old_capacity;
     // Crea una nueva tabla vacía.
     map->buckets = (Pair **) calloc(map->capacity, sizeof(Pair *));
@@ -77,11 +77,12 @@ void enlarge(HashMap * map) {
         }
     }
 
-    // Libera la tabla antigua (el arreglo de punteros).
+    // Liberar 
     free(old_buckets);
 }
 
-//Crea un HashMap con una capacidad inicial dada por el parametro y retorna Map
+// crea una variable HashMap, inicializa arreglo buckets 
+// inicializa resto de variables y retorna el mapa
 HashMap * createMap(long capacity) {
     HashMap * map = (HashMap *)malloc(sizeof(HashMap));
     map->buckets=(Pair **)calloc(capacity, sizeof(Pair*));
@@ -89,10 +90,9 @@ HashMap * createMap(long capacity) {
     map->capacity=capacity;
     map->current=-1;
     return map;
-
     
 }
-
+// elimina el dato correspondiente a la key. Para hacerlo busca el dato y luego lo marca invalido
 void eraseMap(HashMap * map,  char * key) { 
     if(map==NULL || key==NULL) return;
 
@@ -102,7 +102,7 @@ void eraseMap(HashMap * map,  char * key) {
     p->key=NULL;
     map->size--;
 }
-
+//retorna el Pair asociado a la clave ingresada
 Pair * searchMap(HashMap * map,  char * key) {
     if (map==NULL || map->size==0) return NULL;
 
@@ -121,7 +121,7 @@ Pair * searchMap(HashMap * map,  char * key) {
     
     return NULL;
 }
-
+//retorna el primer Pair válido
 Pair * firstMap(HashMap * map) {
     if (map == NULL) return NULL;
     for (long i = 0; i < map->capacity; i++) {
@@ -132,7 +132,7 @@ Pair * firstMap(HashMap * map) {
     }
     return NULL;
 }
-
+ //retorna el siguiente Pair válido
 Pair * nextMap(HashMap * map) {
     if (map == NULL) return NULL;
     for (long i = map->current + 1; i < map->capacity; i++) {
