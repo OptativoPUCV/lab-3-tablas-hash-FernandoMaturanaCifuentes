@@ -1,3 +1,9 @@
+/*
+
+ESTRUCTURAS DE DATOS : LAB 3
+FERNANDO ALEXANDER MATURANA CIFUENTES
+
+*/  
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
